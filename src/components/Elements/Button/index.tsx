@@ -1,13 +1,11 @@
 import { cva, type VariantProps } from "cva";
 
-import styles from "./button.module.css";
-
 interface ButtonProps
   extends
     Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "disabled">,
     VariantProps<typeof buttonVariants> {}
 
-const buttonVariants = cva(styles.button, {
+const buttonVariants = cva([".button"], {
   variants: {
     intent: {
       primary: ["bg-blue-500", "text-white", "border-transparent"],

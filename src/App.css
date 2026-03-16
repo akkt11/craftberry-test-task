@@ -9,6 +9,16 @@ Document
 Use a better box model (opinionated).
 */
 
+:root {
+  --primary-100: #c3edff;
+  --primary-200: #eef7fb;
+  --primary-300: #aaddf3;
+  --primary-400: #5bc1ed;
+  --primary-500: #1c2635;
+  --white: #fff;
+  --black: #000;
+}
+
 *,
 ::before,
 ::after {

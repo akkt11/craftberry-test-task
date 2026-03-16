@@ -1,0 +1,19 @@
+.home {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  &__hero-container {
+    position: relative;
+  }
+
+  &__hero-image {
+    width: 100%;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.35);
+  }
+}
