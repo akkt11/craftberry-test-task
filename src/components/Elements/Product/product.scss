@@ -1,0 +1,19 @@
+.product {
+  border-radius: 8px;
+
+  &__image {
+    width: 350px;
+    height: 345px;
+    object-fit: cover;
+    background-color: gray;
+    border-radius: 8px;
+  }
+
+  &__description {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+}

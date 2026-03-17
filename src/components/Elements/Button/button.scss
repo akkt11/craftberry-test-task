@@ -11,11 +11,8 @@
     }
   }
 
-  &-secondary {
-  }
-
   &-inner {
-    background-color: var(--white);
+    background-color: transparent;
     border: 1px solid var(--black);
     padding: 14px 20px;
     border-radius: 8px;
