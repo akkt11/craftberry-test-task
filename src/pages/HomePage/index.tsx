@@ -1,7 +1,14 @@
+import { useNavigate } from "react-router";
 import { Button, Typography } from "../../components/Elements";
 import "./home-page.scss";
 
 export const HomePage = () => {
+  const navigateTo = useNavigate();
+
+  const navigateToQuiz = () => {
+    navigateTo("/quiz/1");
+  };
+
   return (
     <section className="home">
       <div className="home__hero-container">
@@ -23,7 +30,11 @@ export const HomePage = () => {
             </Typography>
           </div>
 
-          <Button intent="primary" className="home__btn--quiz">
+          <Button
+            intent="primary"
+            className="home__btn--quiz"
+            onClick={navigateToQuiz}
+          >
             Start the quiz
           </Button>
         </div>

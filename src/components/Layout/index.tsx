@@ -1,8 +1,9 @@
 import { Outlet } from "react-router";
+import "./layout.scss";
 
 export const Layout = () => {
   return (
-    <main>
+    <main className="main">
       <Outlet />
     </main>
   );

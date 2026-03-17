@@ -11,6 +11,8 @@ const buttonVariants = cva(["button"], {
     intent: {
       primary: "button-primary",
       secondary: "",
+      inner: "button-inner",
+      ghost: "button-ghost",
     },
     size: {
       small: ["text-sm", "py-1", "px-2"],

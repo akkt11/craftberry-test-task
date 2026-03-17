@@ -12,6 +12,7 @@ const typographyVariants = cva(["typographpy"], {
   variants: {
     variant: {
       h1: "text-5xl",
+      h2: "text-4xl",
       h3: "text-2xl",
       h4: "text-xl",
       paragraph: "text-base",
@@ -34,6 +35,7 @@ export const Typography = (props: TypographyProps) => {
 
   const Tags = {
     h1: "h1",
+    h2: "h2",
     h3: "h3",
     h4: "h4",
     paragraph: "p",
