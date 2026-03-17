@@ -3,7 +3,7 @@ import { Button, CircularProgress, Typography } from "../../Elements";
 import "./quiz.scss";
 import { ArrowRight } from "../../../assets/Icons";
 import { useNavigate, useParams } from "react-router";
-import { QUESTIONS } from "../../../common";
+import { ANSWERS_KEY, QUESTIONS } from "../../../common";
 
 interface QuizProps {
   id: number;
@@ -15,14 +15,40 @@ export const Quiz = ({ options, question }: Partial<QuizProps>) => {
   const { id: paramId = "" } = useParams();
   const navigateTo = useNavigate();
 
-  const [selected, setSelected] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<Record<string, string[]>>(() => {
+    try {
+      return JSON.parse(localStorage.getItem(ANSWERS_KEY) ?? "{}") || {};
+    } catch {
+      return {};
+    }
+  });
+  const [selected, setSelected] = useState<string[]>(answers[paramId] ?? []);
 
-  const toggleQuestion = (option: string) => {
+  const toggleOption = (option: string) => {
     if (selected.includes(option)) {
-      return setSelected((prev) => prev.filter((value) => value !== option));
+      setSelected((prev) => prev.filter((value) => value !== option));
+
+      setAnswers((prev) => {
+        const updated = {
+          ...prev,
+          [paramId]: prev[paramId].filter((value) => value !== option),
+        };
+
+        return updated;
+      });
+
+      return;
     }
 
     setSelected((prev) => [...prev, option]);
+
+    const updated = {
+      ...answers,
+      [paramId]: [...(answers[paramId] ?? []), option],
+    };
+
+    setAnswers(updated);
+    localStorage.setItem(ANSWERS_KEY, JSON.stringify(updated));
   };
 
   const handleNext = () => {
@@ -57,9 +83,10 @@ export const Quiz = ({ options, question }: Partial<QuizProps>) => {
 
             return (
               <Button
+                key={index}
                 intent="inner"
                 className={`quiz-questions__option ${foundOption ? "active" : ""}`}
-                onClick={() => toggleQuestion(option)}
+                onClick={() => toggleOption(option)}
               >
                 {`${getLabel}. ${option}`}
               </Button>

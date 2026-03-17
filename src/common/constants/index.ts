@@ -38,3 +38,5 @@ export const QUESTIONS = [
     options: ["Black", "Brown", "Blonde", "Red/Orange", "Silver/Grey"],
   },
 ];
+
+export const ANSWERS_KEY = "haircare_answers";

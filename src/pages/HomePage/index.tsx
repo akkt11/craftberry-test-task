@@ -1,9 +1,15 @@
 import { useNavigate } from "react-router";
 import { Button, Typography } from "../../components/Elements";
 import "./home-page.scss";
+import { useEffect } from "react";
+import { ANSWERS_KEY } from "../../common";
 
 export const HomePage = () => {
   const navigateTo = useNavigate();
+
+  useEffect(() => {
+    localStorage.removeItem(ANSWERS_KEY);
+  }, []);
 
   const navigateToQuiz = () => {
     navigateTo("/quiz/1");
