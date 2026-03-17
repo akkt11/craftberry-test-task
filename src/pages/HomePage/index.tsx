@@ -1,14 +1,32 @@
-import HeroImage from "../../assets/Images/Hero.png";
+import { Button, Typography } from "../../components/Elements";
 import "./home-page.scss";
 
-interface HomeProps {}
-
-export const HomePage = (props: HomeProps) => {
+export const HomePage = () => {
   return (
     <section className="home">
       <div className="home__hero-container">
-        <img src={HeroImage} alt="hero" className="home__hero-image" />
         <div className="home__overlay" />
+
+        <div className="home__inner">
+          <div className="home__text">
+            <Typography variant="h1" color="white">
+              Build a self care routine suitable for you
+            </Typography>
+
+            <Typography
+              variant="paragraph"
+              color="white"
+              className="home__paragraph"
+            >
+              Take out test to get a personalised self care routine based on
+              your needs.
+            </Typography>
+          </div>
+
+          <Button intent="primary" className="home__btn--quiz">
+            Start the quiz
+          </Button>
+        </div>
       </div>
     </section>
   );

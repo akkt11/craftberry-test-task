@@ -1,2 +1,16 @@
 .button {
+  border: 0;
+
+  &-primary {
+    background-color: var(--primary-100);
+    padding: 14px 40px;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: var(--primary-300);
+    }
+  }
+
+  &-secondary {
+  }
 }

@@ -4,16 +4,46 @@
   height: 100vh;
 
   &__hero-container {
+    display: flex;
+    align-items: center;
     position: relative;
+    height: 50%;
+    background-image: url("../../assets/Images/Hero.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
   }
 
-  &__hero-image {
+  &__inner {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 583px;
     width: 100%;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__paragraph {
+    max-width: 327px;
+  }
+
+  &__paragraph {
+    max-width: 327px;
+  }
+
+  &__btn--quiz {
+    margin-top: 24px;
   }
 
   &__overlay {
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.35);
+    z-index: -1;
   }
 }

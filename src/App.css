@@ -1,13 +1,37 @@
-/*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
+@font-face {
+  font-family: "Grange light";
+  src: url("./assets/Fonts/grange-light-extended.woff2") format("woff2");
+  font-style: normal;
+  font-display: swap;
+}
 
-/*
-Document
-========
-*/
+@font-face {
+  font-family: "Grange medium";
+  src: url("./assets/Fonts/grange-medium-extended.woff2") format("woff2");
+  font-style: normal;
+  font-display: swap;
+}
 
-/**
-Use a better box model (opinionated).
-*/
+@font-face {
+  font-family: "Proxima regular";
+  src: url("./assets/Fonts/proxima-nova-regular.woff2") format("woff2");
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Proxima medium";
+  src: url("./assets/Fonts/proxima-nova-medium-demo.woff2") format("woff2");
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Proxima light";
+  src: url("./assets/Fonts/proxima-nova-light.woff2") format("woff2");
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --primary-100: #c3edff;
@@ -17,6 +41,19 @@ Use a better box model (opinionated).
   --primary-500: #1c2635;
   --white: #fff;
   --black: #000;
+}
+
+.primary-100 {
+  color: var(--primary-100);
+}
+.primary-500 {
+  color: var(--primary-500);
+}
+.white {
+  color: #fff;
+}
+.black {
+  color: #000;
 }
 
 *,
@@ -33,6 +70,17 @@ html {
   line-height: 1.15; /* 1. Correct the line height in all browsers. */
   -webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
   tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  margin: 0;
 }
 
 /*
@@ -130,7 +178,7 @@ select,
 textarea {
   font-family: inherit; /* 1 */
   font-size: 100%; /* 1 */
-  line-height: 1.15; /* 1 */
+  line-height: 19px; /* 1 */
   margin: 0; /* 2 */
 }
 
