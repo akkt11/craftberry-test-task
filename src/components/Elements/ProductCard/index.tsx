@@ -13,8 +13,6 @@ interface ProductProps {
 export const ProductCard = ({ id, title, image, price }: ProductProps) => {
   const { isWishlisted, toggle } = useWishlist();
 
-  console.log(isWishlisted(id), "isWishlisted(id)");
-
   return (
     <div className="product">
       <div
@@ -30,7 +28,7 @@ export const ProductCard = ({ id, title, image, price }: ProductProps) => {
       </div>
 
       <div className="product__image-block">
-        <img src={image} className="product__image" alt="product" />
+        <img src={image} className="product__image" />
       </div>
 
       <div className="product__description">
