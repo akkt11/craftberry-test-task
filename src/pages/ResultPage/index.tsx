@@ -1,16 +1,58 @@
-import { useNavigate } from "react-router";
-import { Button, Product, Typography } from "../../components/Elements";
 import "./result-page.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ProductResponse, ProductType } from "../../common/types";
+import { ResultInner } from "./components/ResultInner";
+import { ResultBlocks } from "./components/ResultBlocks";
+import useLocalStorage from "../../components/Hooks/useLocalStorage";
+import { ANSWERS_KEY, PRODUCTS_URL } from "../../common";
+import { useNavigate } from "react-router";
+import { useWishlist } from "../../components/Hooks";
 
-const PRODUCTS_URL =
-  "https://jeval.com.au/collections/hair-care/products.json?page=1";
+const filterProduct = (
+  { title, body_html, tags }: ProductType,
+  answers: Record<string, string[]>,
+) => {
+  const text = [title, body_html, ...(tags || [])].join(" ").toLowerCase();
+
+  const keywords = Object.values(answers)
+    .join(" ")
+    .toLowerCase()
+    .split(/[\s,/]+/)
+    .filter((kw) => kw.length > 3); // 👈
+
+  return keywords.filter((kw) => text.includes(kw)).length;
+};
 
 export const ResultPage = () => {
   const navigateTo = useNavigate();
   const [products, setProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState(true);
+  const { storedValue: answers } = useLocalStorage<Record<string, string[]>>(
+    ANSWERS_KEY,
+    {},
+  );
+
+  const { wishlist } = useWishlist();
+
+  useEffect(() => {
+    const hasAnswers = Object.keys(answers).length > 0;
+    if (!hasAnswers) navigateTo("/");
+  }, []);
+
+  const filteredProducts = useMemo(() => {
+    return products
+      .map((product) => ({
+        ...product,
+        score: filterProduct(product, answers),
+      }))
+      .sort((a, b) => {
+        const aW = wishlist.includes(a.id) ? 1 : 0;
+        const bW = wishlist.includes(b.id) ? 1 : 0;
+        if (bW !== aW) return bW - aW;
+        return b.score - a.score;
+      })
+      .filter(({ score }) => score > 0);
+  }, [products, answers, wishlist]);
 
   const getProducts = async () => {
     setLoading(true);
@@ -18,8 +60,6 @@ export const ResultPage = () => {
     try {
       const response = await fetch(PRODUCTS_URL);
       const newResponse: ProductResponse = await response.json();
-
-      console.log(newResponse, "newResponse");
 
       setProducts(newResponse.products);
 
@@ -34,70 +74,15 @@ export const ResultPage = () => {
     getProducts();
   }, []);
 
-  const navigateToHome = () => {
-    navigateTo("/");
-  };
-
   return (
     <section className="result">
       <div className="result__container">
         <div className="result__overlay" />
 
-        <div className="result__inner">
-          <div className="result__text">
-            <Typography variant="h1" color="white">
-              Build you everyday self care routine.
-            </Typography>
-
-            <Typography
-              variant="paragraph"
-              color="white"
-              className="result__paragraph"
-            >
-              Perfect for if you're looking for soft, nourished skin, our
-              moisturizing body washes are made with skin-natural nutrients that
-              work with your skin to replenish moisture. With a light formula,
-              the bubbly lather leaves your skin feeling cleansed and cared for.
-              And by choosing relaxing fragrances you can add a moment of calm
-              to the end of your day.
-            </Typography>
-          </div>
-
-          <Button
-            intent="inner"
-            className="result__btn--quiz"
-            onClick={navigateToHome}
-          >
-            Retake the quiz
-          </Button>
-        </div>
+        <ResultInner />
       </div>
 
-      <div className="result__blocks">
-        <div className="result__block">
-          <div className="inner result__block-inner">
-            <Typography variant="h3" className="inner__title">
-              Daily routine
-            </Typography>
-
-            <Typography variant="paragraph">
-              Perfect for if you're looking for soft, nourished skin, our
-              moisturizing body washes are made with skin-natural nutrients that
-              work with your skin to replenish moisture. With a light formula,
-              the bubbly lather leaves your skin feeling cleansed and cared for.
-              And by choosing relaxing fragrances you can add a moment of calm
-              to the end of your day.
-            </Typography>
-          </div>
-        </div>
-
-        {products.map(({ title, images, variants }) => {
-          const { src } = images[0];
-          const { price } = variants[0];
-
-          return <Product title={title} image={src} price={price} />;
-        })}
-      </div>
+      <ResultBlocks products={filteredProducts} loading={loading} />
     </section>
   );
 };

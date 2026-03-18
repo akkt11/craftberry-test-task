@@ -14,13 +14,6 @@
     z-index: 1;
   }
 
-  &__inner {
-    text-align: center;
-    margin: 0 auto;
-    max-width: 583px;
-    width: 100%;
-  }
-
   &__text {
     display: flex;
     flex-direction: column;
@@ -45,34 +38,5 @@
     inset: 0;
     background-color: rgba(0, 0, 0, 0.55);
     z-index: -1;
-  }
-
-  &__blocks {
-    display: flex;
-    gap: 36px;
-    padding: 0 159px;
-    position: absolute;
-    bottom: 300px;
-    z-index: 1;
-  }
-
-  &__block {
-    background-color: var(--primary-200);
-    border-radius: 8px;
-    min-width: 350px;
-    line-height: 150%;
-
-    &-inner {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      padding: 46px 59px;
-    }
-  }
-}
-
-.inner {
-  &__title {
-    text-align: center;
   }
 }

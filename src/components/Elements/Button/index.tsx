@@ -28,7 +28,7 @@ const buttonVariants = cva(["button"], {
 export const Button = ({ className, intent, size, ...props }: ButtonProps) => {
   return (
     <button
-      className={buttonVariants({ intent, size, className })}
+      className={`${className} ${buttonVariants({ intent, size })}`}
       {...props}
     />
   );

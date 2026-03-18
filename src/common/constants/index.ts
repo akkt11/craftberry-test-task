@@ -39,4 +39,9 @@ export const QUESTIONS = [
   },
 ];
 
+export const PRODUCTS_URL =
+  "https://jeval.com.au/collections/hair-care/products.json?page=1";
+
+export const WISHLIST_KEY = "haircare_wishlist";
+
 export const ANSWERS_KEY = "haircare_answers";
