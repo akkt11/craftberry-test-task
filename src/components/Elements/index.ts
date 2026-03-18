@@ -1,4 +1,4 @@
 export * from "./Button";
 export * from "./Typography";
 export * from "./CircularProgress";
-export * from "./Product";
+export * from "./ProductCard";
