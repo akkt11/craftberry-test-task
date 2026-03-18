@@ -2,13 +2,20 @@ import { useNavigate } from "react-router";
 import { Button, Typography } from "../../components/Elements";
 import "./home-page.scss";
 import { useEffect } from "react";
-import { ANSWERS_KEY } from "../../common";
+import { ANSWERS_KEY, WISHLIST_KEY } from "../../common";
+import useLocalStorage from "../../components/Hooks/useLocalStorage";
 
 export const HomePage = () => {
   const navigateTo = useNavigate();
+  const { removeValue: removeQuizValue } = useLocalStorage(ANSWERS_KEY, {});
+  const { removeValue: removeWishlistValue } = useLocalStorage(
+    WISHLIST_KEY,
+    [],
+  );
 
   useEffect(() => {
-    localStorage.removeItem(ANSWERS_KEY);
+    removeQuizValue();
+    removeWishlistValue();
   }, []);
 
   const navigateToQuiz = () => {

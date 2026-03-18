@@ -4,6 +4,7 @@ import "./quiz.scss";
 import { ArrowRight } from "../../../assets/Icons";
 import { useNavigate, useParams } from "react-router";
 import { ANSWERS_KEY, QUESTIONS } from "../../../common";
+import useLocalStorage from "../../Hooks/useLocalStorage";
 
 interface QuizProps {
   id: number;
@@ -15,13 +16,10 @@ export const Quiz = ({ options, question }: Partial<QuizProps>) => {
   const { id: paramId = "" } = useParams();
   const navigateTo = useNavigate();
 
-  const [answers, setAnswers] = useState<Record<string, string[]>>(() => {
-    try {
-      return JSON.parse(localStorage.getItem(ANSWERS_KEY) ?? "{}") || {};
-    } catch {
-      return {};
-    }
-  });
+  const { storedValue: answers, setValue: setAnswers } = useLocalStorage<
+    Record<string, string[]>
+  >(ANSWERS_KEY, {});
+
   const [selected, setSelected] = useState<string[]>(answers[paramId] ?? []);
 
   const toggleOption = (option: string) => {
