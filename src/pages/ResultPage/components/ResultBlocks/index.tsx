@@ -52,34 +52,32 @@ export const ResultBlocks = ({ products, loading }: Props) => {
           </div>
         </div>
 
-        <div className="result-blocks__products">
-          {loading ? (
-            <div className="skeleton-wrapper">
-              {[0, 1].map((i) => (
-                <div key={i} className="skeleton-card" />
-              ))}
-            </div>
-          ) : (
-            paginated.map(({ id, title, images, variants }) => {
-              const { src } = images[0];
-              const { price } = variants[0];
+        {loading ? (
+          <div className="skeleton-wrapper">
+            {[0, 1].map((i) => (
+              <div key={i} className="skeleton-card" />
+            ))}
+          </div>
+        ) : (
+          paginated.map(({ id, title, images, variants }) => {
+            const { src } = images[0];
+            const { price } = variants[0];
 
-              return (
-                <ProductCard
-                  key={id}
-                  id={id}
-                  title={title}
-                  image={src}
-                  price={price}
-                />
-              );
-            })
-          )}
+            return (
+              <ProductCard
+                key={id}
+                id={id}
+                title={title}
+                image={src}
+                price={price}
+              />
+            );
+          })
+        )}
 
-          <Button onClick={handleNext} className="result-blocks__button">
-            <ChevronRight />
-          </Button>
-        </div>
+        <Button onClick={handleNext} className="result-blocks__button">
+          <ChevronRight />
+        </Button>
       </div>
 
       <div className="result-blocks__dots">

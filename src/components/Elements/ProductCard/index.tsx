@@ -29,7 +29,9 @@ export const ProductCard = ({ id, title, image, price }: ProductProps) => {
         <Heart fill={isWishlisted(id) ? "red" : ""} />
       </div>
 
-      <img src={image} className="product__image" alt="product" />
+      <div className="product__image-block">
+        <img src={image} className="product__image" alt="product" />
+      </div>
 
       <div className="product__description">
         <Typography
