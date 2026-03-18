@@ -2,9 +2,7 @@ import { useNavigate } from "react-router";
 import { Button, Typography } from "../../../../components/Elements";
 import "./result-inner.scss";
 
-interface Props {}
-
-export const ResultInner = (props: Props) => {
+export const ResultInner = () => {
   const navigateTo = useNavigate();
 
   const navigateToHome = () => {

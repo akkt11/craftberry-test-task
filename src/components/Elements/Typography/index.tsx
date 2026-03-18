@@ -1,10 +1,11 @@
 import { cva, type VariantProps } from "cva";
-import { createElement, type ReactNode } from "react";
+import { createElement, type CSSProperties, type ReactNode } from "react";
 import type { TypographyTags } from "./types";
 import "./typography.scss";
 
 interface TypographyProps extends VariantProps<typeof typographyVariants> {
   children: ReactNode;
+  style?: CSSProperties;
   className?: string;
 }
 
